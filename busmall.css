@@ -18,3 +18,8 @@ footer {
   text-align: center;
   padding-top: 5px;
 }
+
+#list img {
+  height: 300px;
+  padding-left: 60px;
+}

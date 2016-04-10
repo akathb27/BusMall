@@ -1,162 +1,110 @@
-// var photoOne = {
-//   name: "bag",
-//   location: "<img src='https://raw.githubusercontent.com/codefellows/portland-201n2/master/week_5-6/assets/imgs/bag.jpg'>",
-//   voteCount: 0,
-// }
-//
-// var photoTwo = {
-//   name: "wineGlass",
-//   location: "img src='https://raw.githubusercontent.com/codefellows/portland-201n2/master/week_5-6/assets/imgs/wine_glass.jpg'>",
-//   voteCount: 0,
-// }
-//
-// var photoThree = {
-//   name: "waterCan",
-//   location: "img src='https://raw.githubusercontent.com/codefellows/portland-201n2/master/week_5-6/assets/imgs/water_can.jpg'>",
-//   voteCount: 0,
-// }
-//
-// var photoFour = {
-//   name: "sweep",
-//   location: "img src='https://raw.githubusercontent.com/codefellows/portland-201n2/master/week_5-6/assets/imgs/sweep.jpg'>",
-//   voteCount: 0
-// }
-//
-// var photoFive = {
-//   name: "dragon",
-//   location: "img src='https://raw.githubusercontent.com/codefellows/portland-201n2/master/week_5-6/assets/imgs/dragon.jpg'>",
-//   voteCount: 0,
-// }
-//
-// var photoSix = {
-//   name: "scissors",
-//   location: "img src='https://raw.githubusercontent.com/codefellows/portland-201n2/master/week_5-6/assets/imgs/scissors.jpg'>",
-//   voteCount: 0
-// }
-//
-// var photoSeven = {
-//   name: "shark",
-//   location: "img src='https://raw.githubusercontent.com/codefellows/portland-201n2/master/week_5-6/assets/imgs/shark.jpg'>",
-//   voteCount: 0
-// }
-//
-// var photoEight = {
-//   name: "boots",
-//   location: "img src='https://raw.githubusercontent.com/codefellows/portland-201n2/master/week_5-6/assets/imgs/boots.jpg'>",
-//   voteCount: 0
-// }
-//
-// var photoNine = {
-//   name: "cthulhu",
-//   location: "img src='https://raw.githubusercontent.com/codefellows/portland-201n2/master/week_5-6/assets/imgs/cthulhu.jpg'>",
-//   voteCount: 0
-// }
-//
-// var photoTen = {
-//   name: "usb",
-//   location: "img src='https://raw.githubusercontent.com/codefellows/portland-201n2/master/week_5-6/assets/imgs/usb.jpg'>",
-//   voteCount: 0
-// }
-//
-// var photoEleven = {
-//   name: "chair",
-//   location: "img src='https://raw.githubusercontent.com/codefellows/portland-201n2/master/week_5-6/assets/imgs/chair.jpg'>",
-//   voteCount: 0
-// }
-//
-// var photoTwelve = {
-//   name: "banana",
-//   location: "img src='https://raw.githubusercontent.com/codefellows/portland-201n2/master/week_5-6/assets/imgs/banana.jpg'>",
-//   voteCount: 0
-// }
-//
-// var photoThirteen = {
-//   name: "pen",
-//   location: "img src='https://raw.githubusercontent.com/codefellows/portland-201n2/master/week_5-6/assets/imgs/pen.jpg'>",
-//   voteCount: 0
-// }
+var Photo = function (image, name) {
+  this.image = image;
+  this.name = name;
+  this.voteCount=0;
+};
 
-var photoFourteen = {
-  name: "unicorn",
-  location: "https://raw.githubusercontent.com/codefellows/portland-201n2/master/week_5-6/assets/imgs/unicorn.jpg",
-  voteCount: 0
+var photoArray = new Array ();
+var bag = new Photo("bag.jpg", "bag");
+var banana = new Photo("banana.jpg", "banana");
+var boots = new Photo("boots.jpg", "boots");
+var chair = new Photo("chair.jpg", "chair");
+var cthulhu = new Photo("cthulhu.jpg", "cthulhu");
+var dragon = new Photo("dragon.jpg", "dragon");
+var pen = new Photo("pen.jpg", "pen");
+var scissors = new Photo("scissors.jpg", "scissors");
+var shark = new Photo("shark.jpg", "shark");
+var sweep = new Photo("sweep.jpg", "sweep");
+var unicorn = new Photo("unicorn.jpg", "unicorn");
+var usb = new Photo("usb.jpg", "usb");
+var watercan = new Photo("water_can.jpg", "watercan");
+var wineglass = new Photo("wine_glass.jpg", "wineglass");
+
+var ul = document.getElementById('list');
+var li = document.createElement('li');
+ul.appendChild(li);
+
+
+var products = [bag, banana, boots, chair, cthulhu, dragon, pen, scissors, shark, sweep, unicorn, usb, watercan, wineglass];
+var copyArray = new Array();
+
+function callImages() {
+  makeCopy();
+  li.innerHTML="";
+  for (var i = 0; i < 3; i++){                             //creates random image selection
+  var randomImage = Math.floor(Math.random() * copyArray.length);
+  var pastImage = copyArray.splice(randomImage, 1)[0];
+  var img = document.createElement("img");
+  li.appendChild(img);
+  img.src = pastImage.image;
+  img.id = pastImage.name;
+  img.addEventListener("click", registerClick);
 }
+};
 
-//var photos = [photoOne, photoTwo, photoThree, photoFour, photoFive, photoSix, photoSeven, photoEight, photoNine, photoTen, photoEleven, photoTwelve, photoThirteen, photoFourteen];
-
-
-var photos = ['https://raw.githubusercontent.com/codefellows/portland-201n2/master/week_5-6/assets/imgs/unicorn.jpg'];
-var usedphotos = {};
-var usedphotoscount = 0;
-
-function imgRandom(){
-  var num = Math.floor(Math.random() * (photos.length));
-  if (!usedphotos[num]){
-    document.tree.src = photos[num];    //replace "photos array with the one below. change images to photos"
-    usedphotos[num] = true;
-    usedphotoscount++;
-    if (usedphotoscount === photos.length){
-      usedphotoscount = 0;
-      usedphotos = {};
-    }
-  } else {
-    imgRandom();
+function makeCopy() {                               //makes copy of the array
+  for(var i = 0; i < products.length; i++){
+    copyArray.push(products[i]);
   }
+};
+
+function registerClick () {
+  console.log("image clicked:" + event.target.id);
+  for (var index=0; index < products.length; index++) {
+    if (products[index].name == event.target.id) {
+      products[index].voteCount++;
+    }
+    break;
+  }
+  callImages();
 }
-imgRandom();
-document.getElementById('')
+callImages();
+
+
+
+
+
+
+
 
 
 //
-// function imgRandom(rando) {
-//   return photos.location[Math.floor(Math.random())];
-// //  document.getElementById("imgRandom").innerHTML;
+// var usedphotos = {};
+// var usedphotoscount = 0;
+//
+// function imgRandom(){
+//   var num = Math.floor(Math.random() * photos.length);
+//   if (!usedphotos[num]){
+//     document.tree.src = photos[num];
+//     usedphotos[num] = true;
+//     usedphotoscount++;
+//     if (usedphotoscount === photos.length){
+//       usedphotoscount = 0;
+//       usedphotos = {};
+//     }
+//   } else {
+//     imgRandom();
+//   }
+// }
+// imgRandom();
+// document.getElementById('')
+
+
+// var photosLeft = new Array();       //created an array for images that haven't been used yet
+//
+// function copyArray () {             //created a function that pushes the items that have been used into an array
+//     photosLeft.push(photoArray[i]);
+//   }
+//
+// function randomImage () {            //if there are no photos left, it calls the copied array, which is full, fills up the photos left again for use
+//   if (photosLeft.length === 0) {
+//     copyArray();
+//   }
+//   var i  = Math.floor(Math.random() * photosLeft.length);      //calls a random image from the photos left array
+//   var photoUse = photosLeft.splice(index, 1)[0];               //splice will remove a used image
+//   return photoUse;                                             //this will return a photo to use
 // }
 //
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+// function displayImage () {
 //
-// var images = new Array("https://raw.githubusercontent.com/codefellows/portland-201n2/master/week_5-6/assets/imgs/bag.jpg",
-// "https://raw.githubusercontent.com/codefellows/portland-201n2/master/week_5-6/assets/imgs/banana.jpg",
-// "https://raw.githubusercontent.com/codefellows/portland-201n2/master/week_5-6/assets/imgs/chair.jpg",
-// "https://raw.githubusercontent.com/codefellows/portland-201n2/master/week_5-6/assets/imgs/boots.jpg",
-// "https://raw.githubusercontent.com/codefellows/portland-201n2/master/week_5-6/assets/imgs/cthulhu.jpg",
-// "https://raw.githubusercontent.com/codefellows/portland-201n2/master/week_5-6/assets/imgs/dragon.jpg",
-// "https://raw.githubusercontent.com/codefellows/portland-201n2/master/week_5-6/assets/imgs/pen.jpg",
-// "https://raw.githubusercontent.com/codefellows/portland-201n2/master/week_5-6/assets/imgs/scissors.jpg",
-// "https://raw.githubusercontent.com/codefellows/portland-201n2/master/week_5-6/assets/imgs/shark.jpg",
-// "https://raw.githubusercontent.com/codefellows/portland-201n2/master/week_5-6/assets/imgs/sweep.jpg",
-// "https://raw.githubusercontent.com/codefellows/portland-201n2/master/week_5-6/assets/imgs/unicorn.jpg",
-// "https://raw.githubusercontent.com/codefellows/portland-201n2/master/week_5-6/assets/imgs/usb.jpg",
-// "https://raw.githubusercontent.com/codefellows/portland-201n2/master/week_5-6/assets/imgs/water_can.jpg",
-// "https://raw.githubusercontent.com/codefellows/portland-201n2/master/week_5-6/assets/imgs/wine_glass.jpg");
+// }
