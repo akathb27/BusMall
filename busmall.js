@@ -48,11 +48,49 @@ function makeCopy() {                               //makes copy of the array
   }
 };
 
+
+window.onload = function () {
+  	var chart = new CanvasJS.Chart("chartContainer",
+ 	{
+		animationEnabled: true,
+	title:{
+			text: "Your Product Votes"
+		},
+		data: [
+		{
+			type: "column",
+			dataPoints: [
+ 				{ label: "bag", y: bag.voteCount },
+        { label: "banana", y: banana.voteCount },
+        { label: "boots", y: boots.voteCount },
+        { label: "chair", y: chair.voteCount },
+        { label: "sweep", y: sweep.voteCount },
+        { label: "cthulhu", y: cthulhu.voteCount },
+        { label: "pen", y: pen.voteCount },
+        { label: "usb", y: usb.voteCount },
+        { label: "shark", y: shark.voteCount },
+        { label: "unicorn", y: unicorn.voteCount },
+        { label: "watercan", y: watercan.voteCount },
+        { label: "wineglass", y: wineglass.voteCount },
+        { label: "dragon", y: dragon.voteCount },
+        { label: "scissors", y: scissors.voteCount },
+			]
+    ]
+	});
+ }
+
+var totalVotes = 0;   //number of votes made by user
+
 function registerClick () {
+  totalVotes++;
   console.log("image clicked:" + event.target.id);
   for (var index=0; index < products.length; index++) {
     if (products[index].name == event.target.id) {
       products[index].voteCount++;
+      ul.innerHTML = "";
+      if(totalVotes === 15){
+        chart.render();
+      }
     }
     break;
   }
