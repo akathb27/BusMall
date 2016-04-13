@@ -1,7 +1,8 @@
 var Photo = function (image, name) {
   this.image = image;
   this.name = name;
-  this.voteCount=0;
+  this.label = name;
+  this.y = 0;
 };
 
 var photoArray = new Array ();
@@ -48,101 +49,39 @@ function makeCopy() {                               //makes copy of the array
   }
 };
 
+var chart = null;
 
 window.onload = function () {
-  	var chart = new CanvasJS.Chart("chartContainer",
- 	{
-		animationEnabled: true,
-	title:{
-			text: "Your Product Votes"
-		},
-		data: [
-		{
-			type: "column",
-			dataPoints: [
- 				{ label: "bag", y: bag.voteCount },
-        { label: "banana", y: banana.voteCount },
-        { label: "boots", y: boots.voteCount },
-        { label: "chair", y: chair.voteCount },
-        { label: "sweep", y: sweep.voteCount },
-        { label: "cthulhu", y: cthulhu.voteCount },
-        { label: "pen", y: pen.voteCount },
-        { label: "usb", y: usb.voteCount },
-        { label: "shark", y: shark.voteCount },
-        { label: "unicorn", y: unicorn.voteCount },
-        { label: "watercan", y: watercan.voteCount },
-        { label: "wineglass", y: wineglass.voteCount },
-        { label: "dragon", y: dragon.voteCount },
-        { label: "scissors", y: scissors.voteCount },
-			]
-    ]
-	});
- }
 
-var totalVotes = 0;   //number of votes made by user
+  chart = new CanvasJS.Chart("chartContainer", {
 
+    title: {text: "Your Product Votes"},
+    data: [
+            {
+             type: "column",
+             dataPoints: products
+            }
+          ]
+   });
+
+ chart.render();
+}
+
+totalVotes = 0;
 function registerClick () {
-  totalVotes++;
-  console.log("image clicked:" + event.target.id);
+totalVotes++;
+  console.log(totalVotes);
   for (var index=0; index < products.length; index++) {
     if (products[index].name == event.target.id) {
-      products[index].voteCount++;
-      ul.innerHTML = "";
-      if(totalVotes === 15){
-        chart.render();
+      products[index].y++;
+      li.innerHTML = "";
+      if(totalVotes === 15) {
+        console.log("voteCount reached")
+       chart.render();
       }
     }
-    break;
   }
+  console.log("getting new images");
   callImages();
 }
 callImages();
-
-
-
-
-
-
-
-
-
-//
-// var usedphotos = {};
-// var usedphotoscount = 0;
-//
-// function imgRandom(){
-//   var num = Math.floor(Math.random() * photos.length);
-//   if (!usedphotos[num]){
-//     document.tree.src = photos[num];
-//     usedphotos[num] = true;
-//     usedphotoscount++;
-//     if (usedphotoscount === photos.length){
-//       usedphotoscount = 0;
-//       usedphotos = {};
-//     }
-//   } else {
-//     imgRandom();
-//   }
-// }
-// imgRandom();
-// document.getElementById('')
-
-
-// var photosLeft = new Array();       //created an array for images that haven't been used yet
-//
-// function copyArray () {             //created a function that pushes the items that have been used into an array
-//     photosLeft.push(photoArray[i]);
-//   }
-//
-// function randomImage () {            //if there are no photos left, it calls the copied array, which is full, fills up the photos left again for use
-//   if (photosLeft.length === 0) {
-//     copyArray();
-//   }
-//   var i  = Math.floor(Math.random() * photosLeft.length);      //calls a random image from the photos left array
-//   var photoUse = photosLeft.splice(index, 1)[0];               //splice will remove a used image
-//   return photoUse;                                             //this will return a photo to use
-// }
-//
-// function displayImage () {
-//
-// }
