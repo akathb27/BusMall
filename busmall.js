@@ -51,8 +51,7 @@ function makeCopy() {                               //makes copy of the array
 
 var chart = null;
 
-window.onload = function () {
-
+function buildChart () {
   chart = new CanvasJS.Chart("chartContainer", {
 
     title: {text: "Your Product Votes"},
@@ -63,6 +62,22 @@ window.onload = function () {
             }
           ]
    });
+}
+
+window.onload = function () {
+
+buildChart();
+
+  // chart = new CanvasJS.Chart("chartContainer", {
+  //
+  //   title: {text: "Your Product Votes"},
+  //   data: [
+  //           {
+  //            type: "column",
+  //            dataPoints: products
+  //           }
+  //         ]
+  //  });
 
  chart.render();
 }
@@ -74,10 +89,11 @@ totalVotes++;
   for (var index=0; index < products.length; index++) {
     if (products[index].name == event.target.id) {
       products[index].y++;
+      endProducts = localStorage.setItem('products', JSON.stringify(products));
       li.innerHTML = "";
       if(totalVotes === 15) {
         console.log("voteCount reached")
-       chart.render();
+        chart.render();
       }
     }
   }
@@ -85,3 +101,14 @@ totalVotes++;
   callImages();
 }
 callImages();
+
+
+var lsProducts = localStorage.getItem('products');
+if(lsProducts != null) {
+  products = JSON.parse(lsProducts);
+  // buildChart();
+  // chart.render();
+};
+
+
+//localStorage.clear();
