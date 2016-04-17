@@ -39,6 +39,7 @@ function callImages() {
   li.appendChild(img);
   img.src = pastImage.image;
   img.id = pastImage.name;
+  img.setAttribute("class", "shrink");
   img.addEventListener("click", registerClick);
 }
 };

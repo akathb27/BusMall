@@ -3,23 +3,53 @@ header {
   font-family: Tacoma;
   padding-top: 11px;
   text-align: center;
-  background-color: lavender;
+  background-color: #CCFFFF;
+  color: grey;
+  letter-spacing: 3px;
 }
 
 p {
   font-family: Tacoma;
+  background-color: #CCFFFF;
   font-size: 25px;
+  color: grey;
   text-align: center;
+  letter-spacing: 1px;
 }
 
 footer {
-  background-color: lavender;
+  /*background-color: grey;*/
   font-family: Tacoma;
   text-align: center;
   padding-top: 5px;
+  color: grey;
 }
 
 #list img {
   height: 150px;
-  padding-left: 150px;
+  padding-left: 180px;
+}
+
+html{
+  background-color: #CCFFFF;
+}
+
+#imgDiv {
+  height: 200px;
+  border: 5px solid grey;
+}
+
+#chartContainer {
+  height: 300px; width: 99%;
+  border: 5px solid grey;
+}
+
+.shrink:hover {
+transform: scale(0.8);
+-webkit-transform: scale(0.8);
+-ms-transform: scale(0.8);
+}
+
+.fade:hover {
+  opacity: 
 }
